@@ -6,7 +6,7 @@ const SampleView = ({ increment, decrement, counter }) => {
       <h2>SampleView</h2>
       <label>Click Count : {counter}</label>
       <div>
-        <button onClick={() => increment()}>Increment</button>
+        <button onClick={() => increment()}>Increment Button</button>
         <button onClick={() => decrement()}>Decrement</button>
       </div>
     </>
