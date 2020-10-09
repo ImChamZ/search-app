@@ -7,10 +7,10 @@ const SampleView = ({ increment, decrement, counter }) => {
       <label>Click Count : {counter}</label>
       <div>
         <button onClick={() => increment()}>
-          Increment Button - Second Branch
+          Increment Button - First Branch
         </button>
         <button onClick={() => decrement()}>
-          Decrement Button - Second Branch
+          Decrement Button - First Branch
         </button>
       </div>
     </>
