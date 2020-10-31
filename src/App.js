@@ -1,14 +1,9 @@
-import React, { Component } from "react";
-import SampleViewContainer from "./containers/SampleViewContainer";
+import React from 'react';
+import MainRoutes from './routes/MainRoutes';
 
-class App extends Component {
-  render() {
-    return (
-      <>
-        <h1>Hello World from React + Webpack + Babel + Flux Boilerplate </h1>
-        <SampleViewContainer></SampleViewContainer>
-      </>
-    );
-  }
-}
+const App = () => (
+  <>
+    <MainRoutes />
+  </>
+);
 export default App;

@@ -1,3 +1,35 @@
-body {
-  background-color: springgreen;
+.app-bar-title {
+    flex-grow: 1;
+}
+
+.MuiSvgIcon-root.user-active {
+    color: #02ff00;
+    font-size: 1rem;
+}
+
+.MuiSelect-select.MuiSelect-select {
+    min-width: 100px;
+}
+
+.MuiTableRow-head {
+    background-color: #f5f5f5;
+}
+.center-aligned {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-container {
+    min-height: 100vh;
+}
+
+.form-login {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 400px;
+}
+
+.login-form-element {
+    width: 300px;
 }
