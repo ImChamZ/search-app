@@ -38,7 +38,7 @@ Move to the appropriate directory
 ```bash
   cd <YOUR_PROJECT_NAME>
 ```
-Nativate into the directory and run app for the first time using. 
+Navigate into the directory and run app for the first time using. 
 
 ```bash
   npm run setup
