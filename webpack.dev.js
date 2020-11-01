@@ -15,6 +15,7 @@ module.exports = {
     port: 3000,
     compress: true,
     publicPath: '/',
+    disableHostCheck: true,
     historyApiFallback: true,
     contentBase: path.resolve(__dirname, 'public/dist'),
   },

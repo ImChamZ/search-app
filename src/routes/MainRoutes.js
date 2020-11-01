@@ -11,9 +11,14 @@ const MainRoutes = () => (
     <Container maxWidth="xl">
       <Paper className="main-container">
         <Route path="/" component={(props) => <Header {...props} />} />
-        <Route exact path="/" render={() => <Redirect to="/home" />} />
-        <Route exact path="/home" component={MainSearchView} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/home" component={MainSearchView} />
+        <Route
+          path="/"
+          render={() => {
+            <Redirect to="/login" />;
+          }}
+        />
       </Paper>
     </Container>
   </Router>
