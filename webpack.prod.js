@@ -34,7 +34,7 @@ module.exports = {
       filename: './index.html',
     }),
     new webpack.EnvironmentPlugin({
-      NODE_API_URL_BASE: 'http://localhost:3005/api',
+      NODE_API_URL_BASE: 'https://search-app-sample.herokuapp.com/api',
     }),
   ],
   resolve: {

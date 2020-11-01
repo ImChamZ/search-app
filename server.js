@@ -27,9 +27,14 @@ app.use('/api/users', userActions);
 app.use('/api/tickets', ticketActions);
 app.use('/api/organizations', organizationActions);
 
-app.get('/', (req, res) => {
-  res.status(200).send('Hello World!');
-});
+app.use('/', express.static('build'));
+app.use('/login', express.static('build'));
+app.use('/home', express.static('build'));
+
+// app.get('/', (req, res) => {
+//   res.status(200).send('Hello World!');
+// });
+
 app.listen(port, function () {
   console.log('App listening on port: ' + port);
 });
