@@ -31,32 +31,33 @@ const Login = ({ history, userLoggedIn }) => {
   return (
     <Grid
       container
-      spacing={2}
+      spacing={3}
       direction="column"
       alignItems="center"
       style={{ minHeight: '100vh', marginTop: '10px' }}
     >
-      <Grid style={{ textAlign: 'center' }} item xs={12} sm={6}>
+      <Grid
+        style={{ textAlign: 'center', minWidth: '30%' }}
+        item
+        xs={12}
+        sm={6}
+      >
         <Card>
           <CardHeader title="Log In" />
           <CardContent>
-            <Box className="center-aligned" m={0}>
-              <TextField
-                className="login-form-element"
-                name="User Name"
-                label="User Name"
-                type="text"
-              />
-            </Box>
-            <Box className="center-aligned" m={2}>
-              <TextField
-                className="login-form-element"
-                name="Password"
-                label="Password"
-                type="password"
-              />
-            </Box>
-            <Box className="center-aligned " m={2}>
+            <TextField
+              className="login-form-element"
+              name="User Name"
+              label="User Name"
+              type="text"
+            />
+            <TextField
+              className="login-form-element"
+              name="Password"
+              label="Password"
+              type="password"
+            />
+            <Box className="center-aligned " mt={2}>
               <Button
                 className="login-form-element"
                 variant="contained"
