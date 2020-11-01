@@ -64,7 +64,7 @@ const OrganizationsSearchView = () => {
       </Grid>
       <Grid item xs={12}>
         {loadingError ? (
-          <Alert className="center-aligned" severity="error">
+          <Alert className="center-aligned grid-error" severity="error">
             <AlertTitle>Error</AlertTitle>
             {loadingError}
           </Alert>
