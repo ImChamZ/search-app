@@ -4,6 +4,7 @@ import SearchForm from '../../common/SearchForm';
 import UserDetailView from './UserDetailView';
 import CircularLoader from '../../common/CircularLoader';
 import UserAPI from '../../../utils/api/UserAPI';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 const fieldList = [
   { key: '', value: 'all' },
@@ -30,29 +31,36 @@ const fieldList = [
 const UsersSearchView = () => {
   const [userList, setUserList] = useState([]);
   const [isLoading, setLoadingState] = useState(false);
+  const [loadingError, setLoadingError] = useState();
 
   useEffect(() => {
-    getUserData();
-  }, []);
-
-  const getUserData = () => {
     setLoadingState(true);
     UserAPI.list()
       .then((result) => {
         setUserList(result);
-        setLoadingState(false);
+        setLoadingError('');
       })
-      .catch(() => setLoadingState(false));
-  };
+      .catch(() => {
+        setLoadingError('Error loading data from the server.');
+      })
+      .finally(() => {
+        setLoadingState(false);
+      });
+  }, []);
 
   const handleSearchCallback = (searchCriteria) => {
     setLoadingState(true);
     UserAPI.search(searchCriteria)
       .then((result) => {
         setUserList(result);
-        setLoadingState(false);
+        setLoadingError('');
       })
-      .catch(() => setLoadingState(false));
+      .catch(() => {
+        setLoadingError('Error loading data from the server.');
+      })
+      .finally(() => {
+        setLoadingState(false);
+      });
   };
 
   return (
@@ -64,9 +72,16 @@ const UsersSearchView = () => {
         />
       </Grid>
       <Grid item xs={12}>
-        <CircularLoader isLoading={isLoading}>
-          <UserDetailView userData={userList} />
-        </CircularLoader>
+        {loadingError ? (
+          <Alert className="center-aligned grid-error" severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {loadingError}
+          </Alert>
+        ) : (
+          <CircularLoader isLoading={isLoading}>
+            <UserDetailView userData={userList} />
+          </CircularLoader>
+        )}
       </Grid>
     </Grid>
   );

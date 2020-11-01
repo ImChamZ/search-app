@@ -4,6 +4,7 @@ import SearchForm from '../../common/SearchForm';
 import TicketDetailView from './TicketDetailView';
 import CircularLoader from '../../common/CircularLoader';
 import TicketAPI from '../../../utils/api/TicketAPI';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 const fieldList = [
   { key: '', value: 'all' },
@@ -28,15 +29,21 @@ const fieldList = [
 const TicketsSearchView = () => {
   const [ticketList, setTicketList] = useState([]);
   const [isLoading, setLoadingState] = useState(false);
+  const [loadingError, setLoadingError] = useState();
 
   useEffect(() => {
     setLoadingState(true);
     TicketAPI.list()
       .then((result) => {
         setTicketList(result);
-        setLoadingState(false);
+        setLoadingError('');
       })
-      .catch(() => setLoadingState(false));
+      .catch(() => {
+        setLoadingError('Error loading data from the server.');
+      })
+      .finally(() => {
+        setLoadingState(false);
+      });
   }, []);
 
   const handleSearchCallback = (searchCriteria) => {
@@ -44,9 +51,14 @@ const TicketsSearchView = () => {
     TicketAPI.search(searchCriteria)
       .then((result) => {
         setTicketList(result);
-        setLoadingState(false);
+        setLoadingError('');
       })
-      .catch(() => setLoadingState(false));
+      .catch(() => {
+        setLoadingError('Error loading data from the server.');
+      })
+      .finally(() => {
+        setLoadingState(false);
+      });
   };
 
   return (
@@ -58,9 +70,16 @@ const TicketsSearchView = () => {
         />
       </Grid>
       <Grid item xs={12}>
-        <CircularLoader isLoading={isLoading}>
-          <TicketDetailView ticketList={ticketList} />
-        </CircularLoader>
+        {loadingError ? (
+          <Alert className="center-aligned" severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {loadingError}
+          </Alert>
+        ) : (
+          <CircularLoader isLoading={isLoading}>
+            <TicketDetailView ticketList={ticketList} />
+          </CircularLoader>
+        )}
       </Grid>
     </Grid>
   );

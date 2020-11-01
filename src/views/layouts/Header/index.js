@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
+import {
+  AppBar,
+  Avatar,
+  IconButton,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
 import { connect } from 'react-redux';
 import { AccountCircle } from '@material-ui/icons';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -28,8 +34,17 @@ const Header = ({ currentUser, userLogout, history }) => {
               aria-haspopup="true"
               color="inherit"
             >
-              <AccountCircle />
+              {currentUser?.imageUrl ? (
+                <Avatar
+                  className="usr-image-sm"
+                  alt="Remy Sharp"
+                  src={currentUser?.imageUrl}
+                />
+              ) : (
+                <AccountCircle />
+              )}
             </IconButton>
+
             <div>
               Hello,
               {currentUser?.name}{' '}

@@ -4,6 +4,7 @@ import SearchForm from '../../common/SearchForm';
 import OrganizationDetailView from './OrganizationDetailView';
 import CircularLoader from '../../common/CircularLoader';
 import OrganizationAPI from '../../../utils/api/OrganizationAPI';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 const fieldList = [
   { key: '', value: 'all' },
@@ -21,15 +22,21 @@ const fieldList = [
 const OrganizationsSearchView = () => {
   const [organizationsList, setOrganizationList] = useState([]);
   const [isLoading, setLoadingState] = useState(false);
+  const [loadingError, setLoadingError] = useState();
 
   useEffect(() => {
     setLoadingState(true);
     OrganizationAPI.list()
       .then((result) => {
         setOrganizationList(result);
-        setLoadingState(false);
+        setLoadingError('');
       })
-      .catch(() => setLoadingState(false));
+      .catch(() => {
+        setLoadingError('Error loading data from the server.');
+      })
+      .finally(() => {
+        setLoadingState(false);
+      });
   }, []);
 
   const handleSearchCallback = (searchCriteria) => {
@@ -37,9 +44,14 @@ const OrganizationsSearchView = () => {
     OrganizationAPI.search(searchCriteria)
       .then((result) => {
         setOrganizationList(result);
-        setLoadingState(false);
+        setLoadingError('');
       })
-      .catch(() => setLoadingState(false));
+      .catch(() => {
+        setLoadingError('Error loading data from the server.');
+      })
+      .finally(() => {
+        setLoadingState(false);
+      });
   };
 
   return (
@@ -51,9 +63,16 @@ const OrganizationsSearchView = () => {
         />
       </Grid>
       <Grid item xs={12}>
-        <CircularLoader isLoading={isLoading}>
-          <OrganizationDetailView organizationList={organizationsList} />
-        </CircularLoader>
+        {loadingError ? (
+          <Alert className="center-aligned" severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {loadingError}
+          </Alert>
+        ) : (
+          <CircularLoader isLoading={isLoading}>
+            <OrganizationDetailView organizationList={organizationsList} />
+          </CircularLoader>
+        )}
       </Grid>
     </Grid>
   );

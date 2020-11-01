@@ -7,19 +7,24 @@ import {
   Grid,
   TextField,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { userLoggedIn } from '../../store/auth';
+import { Alert } from '@material-ui/lab';
 
 const Login = ({ history, userLoggedIn }) => {
+  const [loginError, setLoginError] = useState();
+
   const responseGoogleSuccess = (response) => {
+    setLoginError('');
     userLoggedIn(response);
     history.push('/home');
   };
 
   const responseGoogleFailed = (response) => {
+    setLoginError('Error login with Google. Please try later.');
     console.error(response);
   };
 
@@ -70,6 +75,11 @@ const Login = ({ history, userLoggedIn }) => {
               </GoogleLogin>
             </Box>
           </CardContent>
+          {loginError ? (
+            <Alert variant="outlined" severity="error">
+              {loginError}
+            </Alert>
+          ) : null}
         </Card>
       </Grid>
     </Grid>

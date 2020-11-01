@@ -19,6 +19,11 @@ const SearchForm = ({ searchableFieldList = [], onSearchCallback }) => {
               label="Search Value"
               type="search"
               onChange={updateSearchCriteria}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  onSearchCallback(searchCriteria);
+                }
+              }}
             />
           </FormControl>
         </Grid>
