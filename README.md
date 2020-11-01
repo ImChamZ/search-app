@@ -1,4 +1,5 @@
 # Search App
+Deployed app link - https://search-app-sample.herokuapp.com/login
 
 ## Table of contents
 * [General info](#general-info)
