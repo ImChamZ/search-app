@@ -13,10 +13,11 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      className="tab-container"
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box p={3} className="tab-container-box">
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -32,7 +33,7 @@ const MainSearchView = () => {
 
   return (
     <>
-      <AppBar color="inherit" position="static">
+      <AppBar color="inherit" position="fixed" className="sub-header">
         <Tabs
           value={value}
           onChange={handleChange}

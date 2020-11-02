@@ -17,6 +17,7 @@ const UserDetailRow = ({ user = {} }) => {
   const {
     name,
     alias,
+    active,
     email,
     organization_id,
     organization_name,
@@ -50,7 +51,9 @@ const UserDetailRow = ({ user = {} }) => {
         </TableCell>
         <TableCell>
           <span className="">
-            <FiberManualRecordIcon className="user-active" />
+            <FiberManualRecordIcon
+              className={`user-${active ? 'active' : 'inactive'}`}
+            />
           </span>{' '}
           {name} ({alias})
         </TableCell>
@@ -76,6 +79,8 @@ const UserDetailRow = ({ user = {} }) => {
                     <strong>Organization Id</strong> :{organization_id}
                     <br />
                     <strong>Signature</strong> :{signature}
+                    <br />
+                    <strong>Active User</strong> :{active ? 'Yes' : 'No'}
                     <br />
                     <strong>Shared</strong> :{verified ? 'Yes' : 'No'}
                     <br />

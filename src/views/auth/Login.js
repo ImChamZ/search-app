@@ -13,9 +13,21 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { userLoggedIn } from '../../store/auth';
 import { Alert } from '@material-ui/lab';
+import AuthAPI from '../../utils/api/AuthAPI';
 
 const Login = ({ history, userLoggedIn }) => {
   const [loginError, setLoginError] = useState();
+
+  const handleUserLogin = () => {
+    AuthAPI.userLogin()
+      .then((response) => {
+        userLoggedIn(response);
+        history.push('/home');
+      })
+      .catch(() => {
+        setLoginError('Error login. Please try again');
+      });
+  };
 
   const responseGoogleSuccess = (response) => {
     setLoginError('');
@@ -34,7 +46,7 @@ const Login = ({ history, userLoggedIn }) => {
       spacing={3}
       direction="column"
       alignItems="center"
-      style={{ minHeight: '100vh', marginTop: '10px' }}
+      style={{ minHeight: '100vh', marginTop: '80px', position: 'fixed' }}
     >
       <Grid
         style={{ textAlign: 'center', minWidth: '30%' }}
@@ -62,6 +74,9 @@ const Login = ({ history, userLoggedIn }) => {
                 className="login-form-element"
                 variant="contained"
                 color="primary"
+                onClick={() => {
+                  handleUserLogin();
+                }}
               >
                 Sign In
               </Button>

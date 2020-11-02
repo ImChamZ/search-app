@@ -6,6 +6,10 @@
   color: #02ff00;
   font-size: 1rem;
 }
+.MuiSvgIcon-root.user-inactive {
+  color: #f55405;
+  font-size: 1rem;
+}
 
 .MuiSelect-select.MuiSelect-select {
   min-width: 100px;
@@ -20,7 +24,22 @@
   align-items: center;
 }
 .main-container {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sub-header {
+  top: 64px !important;
+}
+
+.tab-container {
+  top: 81px;
+  overflow: auto;
+  margin-top: 110px;
+}
+
+.tab-container-box {
+  height: 87vh;
 }
 
 .form-login {

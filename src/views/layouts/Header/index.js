@@ -21,7 +21,7 @@ const Header = ({ currentUser, userLogout, history }) => {
   }, [currentUser, history]);
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Toolbar>
         <Typography variant="h5" className="app-bar-title">
           Search Application
